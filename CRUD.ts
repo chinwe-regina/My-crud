@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from "http";
 import event from "events";
 
-const port: number = 4000;
+const port: number = 2002;
 
 interface iData {
   name: string;
@@ -16,36 +16,24 @@ interface iMessage {
   data: null | {} | {}[];
 }
 
-const set08: iData[] = [
+const mySet: iData[] = [
   {
-    name: "Wisdom",
+    name: "sean",
     id: 1,
-    phone: 8132329868,
-    stack: "full-stack",
+    phone: 80236789239,
+    stack: "full",
   },
   {
-    name: "Prince",
+    name: "Price",
     id: 2,
-    phone: 81088392868,
+    phone: 8078686869,
     stack: "full-stack",
   },
   {
-    name: "Isaac",
-    id: 3,
-    phone: 8137088076,
-    stack: "full-stack",
-  },
-  {
-    name: "Daniel",
+    name: "Delight",
     id: 4,
-    phone: 9045583738,
-    stack: "full-stack",
-  },
-  {
-    name: "Emmanuel",
-    id: 5,
-    phone: 8012384895,
-    stack: "full-stack",
+    phone: 90776667789,
+    stack: "ful-stack",
   },
 ];
 
@@ -65,23 +53,23 @@ const App = http.createServer(
         container.push(chunk);
       })
       .on("end", () => {
+        //GET Method
         if (url === "/" && method === "GET") {
           status = 200;
-          response.message = "All set08 data gotten";
+          response.message = "All set 08 data gotten";
           response.success = true;
-          response.data = set08;
+          response.data = mySet;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
-
-        //POST Mtho
+        // post method
         if (url === "/" && method === "POST") {
           status = 201;
           const Body = JSON.parse(container);
-          set08.push(Body);
-          response.message = "the set08 data was successfully added";
+          mySet.push(Body);
+          response.message = "SUCCESSFULLY ADDED";
           response.success = true;
-          response.data = set08;
+          response.data = mySet;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
@@ -90,5 +78,5 @@ const App = http.createServer(
 );
 
 App.listen(port, () => {
-  console.log(`Listening to port, ${port}`);
+  console.log(`listening to port:${port}`);
 });

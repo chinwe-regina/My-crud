@@ -18,32 +18,32 @@ interface iMessage {
 
 const MyTeam: iData[] = [
   {
-    name: "samual",
+    name: "victor",
     id: 1,
     phone: 708402890056,
     stack: "full-stack",
   },
   {
-    name: "paul",
+    name: "habib",
     id: 2,
     phone: 7081111101,
     stack: "ful-stack",
   },
   {
-    name: "magret",
+    name: "dennis",
     id: 3,
     phone: 708402856,
     stack: "full-stack",
   },
   {
-    name: "matthew",
+    name: "samuel",
     id: 4,
     phone: 7912345634,
     stack: "ful-stack",
   },
 ];
 
-const MyApp = http.createServer(
+const Myserver = http.createServer(
   (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
     res.setHeader("Content-type", "Application/Json");
     const { method, url } = req;
@@ -83,6 +83,6 @@ const MyApp = http.createServer(
   }
 );
 
-MyApp.listen(port, () => {
+Myserver.listen(port, () => {
   console.log(`the port is listening to port:${port}`);
 });

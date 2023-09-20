@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from "http";
 import event from "events";
 
-const port: number = 2002;
+const port: number = 3005;
 
 interface iData {
   name: string;
@@ -16,28 +16,22 @@ interface iMessage {
   data: null | {} | {}[];
 }
 
-const mySet: iData[] = [
+const shecode: iData[] = [
   {
-    name: "sean",
+    name: "jemima",
     id: 1,
-    phone: 80236789239,
-    stack: "full",
-  },
-  {
-    name: "Price",
-    id: 2,
-    phone: 8078686869,
+    phone: 7087990056,
     stack: "full-stack",
   },
   {
-    name: "Delight",
-    id: 4,
-    phone: 90776667789,
+    name: "Joan",
+    id: 2,
+    phone: 7087877777,
     stack: "ful-stack",
   },
 ];
 
-const App = http.createServer(
+const MyServer = http.createServer(
   (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
     res.setHeader("Content-Type", "Application/Json");
     const { method, url } = req;
@@ -58,7 +52,7 @@ const App = http.createServer(
           status = 200;
           response.message = "All set 08 data gotten";
           response.success = true;
-          response.data = mySet;
+          response.data = shecode;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
@@ -66,10 +60,10 @@ const App = http.createServer(
         if (url === "/" && method === "POST") {
           status = 201;
           const Body = JSON.parse(container);
-          mySet.push(Body);
+          shecode.push(Body);
           response.message = "SUCCESSFULLY ADDED";
           response.success = true;
-          response.data = mySet;
+          response.data = shecode;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
@@ -77,6 +71,6 @@ const App = http.createServer(
   }
 );
 
-App.listen(port, () => {
+MyServer.listen(port, () => {
   console.log(`listening to port:${port}`);
 });

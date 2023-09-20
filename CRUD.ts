@@ -16,24 +16,36 @@ interface iMessage {
   data: null | {} | {}[];
 }
 
-const shecode: iData[] = [
+const MyTeam: iData[] = [
   {
-    name: "jemima",
+    name: "samual",
     id: 1,
-    phone: 7087990056,
+    phone: 708402890056,
     stack: "full-stack",
   },
   {
-    name: "Joan",
+    name: "paul",
     id: 2,
-    phone: 7087877777,
+    phone: 7081111101,
+    stack: "ful-stack",
+  },
+  {
+    name: "magret",
+    id: 3,
+    phone: 708402856,
+    stack: "full-stack",
+  },
+  {
+    name: "matthew",
+    id: 4,
+    phone: 7912345634,
     stack: "ful-stack",
   },
 ];
 
-const MyServer = http.createServer(
+const MyApp = http.createServer(
   (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
-    res.setHeader("Content-Type", "Application/Json");
+    res.setHeader("Content-type", "Application/Json");
     const { method, url } = req;
     let status: number = 404;
     let response: iMessage = {
@@ -50,20 +62,20 @@ const MyServer = http.createServer(
         //GET Method
         if (url === "/" && method === "GET") {
           status = 200;
-          response.message = "All set 08 data gotten";
+          response.message = "All data successfully obtained";
           response.success = true;
-          response.data = shecode;
+          response.data = MyTeam;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
-        // post method
+        //POST Method
         if (url === "/" && method === "POST") {
           status = 201;
           const Body = JSON.parse(container);
-          shecode.push(Body);
-          response.message = "SUCCESSFULLY ADDED";
+          MyTeam.push(Body);
+          response.message = "Added";
           response.success = true;
-          response.data = shecode;
+          response.data = MyTeam;
           res.write(JSON.stringify({ response, status }));
           res.end();
         }
@@ -71,6 +83,6 @@ const MyServer = http.createServer(
   }
 );
 
-MyServer.listen(port, () => {
-  console.log(`listening to port:${port}`);
+MyApp.listen(port, () => {
+  console.log(`the port is listening to port:${port}`);
 });

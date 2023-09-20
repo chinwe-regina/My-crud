@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from "http";
 import event from "events";
 
-const port: number = 3005;
+const port: number = 3006;
 
 interface iData {
   name: string;
@@ -43,11 +43,11 @@ const MyTeam: iData[] = [
   },
 ];
 
-const Myserver = http.createServer(
+const server = http.createServer(
   (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
-    res.setHeader("Content-type", "Application/Json");
+    res.setHeader("Content-Type", "Apllication/JSon ");
     const { method, url } = req;
-    let status: number = 404;
+    let status: Number = 404;
     let response: iMessage = {
       message: "failed",
       success: false,
@@ -55,17 +55,17 @@ const Myserver = http.createServer(
     };
     const container: any = [];
     req
-      .on("data", (chunk: any) => {
-        container.push(chunk);
+      .on("data", (Chunk: any) => {
+        container.push(Chunk);
       })
       .on("end", () => {
         //GET Method
         if (url === "/" && method === "GET") {
           status = 200;
-          response.message = "All data successfully obtained";
-          response.success = true;
-          response.data = MyTeam;
-          res.write(JSON.stringify({ response, status }));
+          response.message = "Successful";
+          (response.success = true),
+            (response.data = MyTeam),
+            res.write(JSON.stringify({ response, status }));
           res.end();
         }
         //POST Method
@@ -83,6 +83,6 @@ const Myserver = http.createServer(
   }
 );
 
-Myserver.listen(port, () => {
+server.listen(port, () => {
   console.log(`the port is listening to port:${port}`);
 });
